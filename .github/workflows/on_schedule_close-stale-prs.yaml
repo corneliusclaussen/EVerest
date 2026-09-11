@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 3 * * *'
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Log actions without labeling/commenting/closing anything'
+        type: boolean
+        default: true
 
 jobs:
   close-stale-prs:
@@ -15,6 +20,7 @@ jobs:
       - name: Warn and close stale PRs
         uses: actions/stale@v9
         with:
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
           # Only manage PRs, not issues.
           days-before-issue-stale: -1
           days-before-issue-close: -1
