@@ -25,8 +25,8 @@ jobs:
           days-before-issue-stale: -1
           days-before-issue-close: -1
 
-          days-before-pr-stale: 90
-          days-before-pr-close: 14
+          days-before-pr-stale: 0
+          days-before-pr-close: 0
 
           stale-pr-label: 'stale'
           exempt-pr-labels: 'pr-keep-open-after-90-days'
