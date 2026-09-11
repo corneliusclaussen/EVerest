@@ -1,0 +1,38 @@
+name: On Schedule - Close Stale PRs
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  close-stale-prs:
+    name: Close Stale PRs
+    runs-on: ubuntu-24.04
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Warn and close stale PRs
+        uses: actions/stale@v9
+        with:
+          # Only manage PRs, not issues.
+          days-before-issue-stale: -1
+          days-before-issue-close: -1
+
+          days-before-pr-stale: 90
+          days-before-pr-close: 14
+
+          stale-pr-label: 'stale'
+          exempt-pr-labels: 'pr-keep-open-after-90-days'
+
+          stale-pr-message: >
+            This pull request has had no activity for 90 days and will be
+            automatically closed in 14 days if no further activity occurs.
+            If this PR should be kept open, add the
+            `pr-keep-open-after-90-days` label or push an update.
+          close-pr-message: >
+            This pull request was closed automatically after 90 days of
+            inactivity followed by a further 14 days without a response to
+            the stale warning. Feel free to reopen it if it is still relevant.
+
+          remove-stale-when-updated: true
