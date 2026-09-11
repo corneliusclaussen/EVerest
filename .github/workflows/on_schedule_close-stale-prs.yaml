@@ -22,11 +22,11 @@ jobs:
         uses: actions/stale@v9
         with:
           debug-only: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
-          days-before-issue-stale: 90
-          days-before-issue-close: 14
+          days-before-issue-stale: 0
+          days-before-issue-close: 0
 
-          days-before-pr-stale: 90
-          days-before-pr-close: 14
+          days-before-pr-stale: 0
+          days-before-pr-close: 0
 
           # Each already-stale item costs ~2 API ops per run just to re-check it,
           # and ~2 more to close it; the ~140 item backlog needs headroom well
